@@ -1,13 +1,13 @@
 {
   "name": "hardiumlauncher",
-  "version": "0.0.19",
+  "version": "0.0.20",
   "productName": "Hardium Launcher",
   "description": "Hardium Minecraft Launcher",
   "author": "mrpiano5454",
   "license": "UNLICENSED",
-  "homepage": "https://github.com/MrPiano5454/HardiumLauncher",
+  "homepage": "https://github.com/MrPiano5454/Hardium-Launcher",
   "bugs": {
-    "url": "https://github.com/MrPiano5454/HardiumLauncher/pulls"
+    "url": "https://github.com/MrPiano5454/Hardium-Launcher/pulls"
   },
   "private": true,
   "main": "index.js",
@@ -49,6 +49,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MrPiano5454/HardiumLauncher.git"
+    "url": "git+https://github.com/MrPiano5454/Hardium-Launcher.git"
   }
 }
