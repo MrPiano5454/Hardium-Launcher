@@ -43,8 +43,8 @@ class ProcessBuilder {
         logger.info('Using liteloader:', this.usingLiteLoader)
         const modObj = this.resolveModConfiguration(ConfigManager.getModConfiguration(this.server.getID()).mods, this.server.getModules())
         
-        // Mod list below 1.13
-        if(!Util.mcVersionAtLeast('1.13', this.server.getMinecraftVersion())){
+        // Mod list below 1.13.4
+        if(!Util.mcVersionAtLeast('1.19.4', this.server.getMinecraftVersion())){
             this.constructJSONModList('forge', modObj.fMods, true)
             if(this.usingLiteLoader){
                 this.constructJSONModList('liteloader', modObj.lMods, true)
@@ -54,7 +54,7 @@ class ProcessBuilder {
         const uberModArr = modObj.fMods.concat(modObj.lMods)
         let args = this.constructJVMArguments(uberModArr, tempNativePath)
 
-        if(Util.mcVersionAtLeast('1.13', this.server.getMinecraftVersion())){
+        if(Util.mcVersionAtLeast('1.19.4', this.server.getMinecraftVersion())){
             //args = args.concat(this.constructModArguments(modObj.fMods))
             args = args.concat(this.constructModList(modObj.fMods))
         }
@@ -84,9 +84,9 @@ class ProcessBuilder {
             logger.info('Exited with code', code)
             fs.remove(tempNativePath, (err) => {
                 if(err){
-                    logger.warn('Error while deleting temp dir', err)
+                    logger.warn('Erreur lors de la suppression du répertoire temporaire', err)
                 } else {
-                    logger.info('Temp dir deleted successfully.')
+                    logger.info('Répertoire temporaire supprimé avec succès.')
                 }
             })
         })
@@ -326,7 +326,7 @@ class ProcessBuilder {
      * @returns {Array.<string>} An array containing the full JVM arguments for this process.
      */
     constructJVMArguments(mods, tempNativePath){
-        if(Util.mcVersionAtLeast('1.13', this.server.getMinecraftVersion())){
+        if(Util.mcVersionAtLeast('1.19.4', this.server.getMinecraftVersion())){
             return this._constructJVMArguments113(mods, tempNativePath)
         } else {
             return this._constructJVMArguments112(mods, tempNativePath)
@@ -531,8 +531,8 @@ class ProcessBuilder {
         }
 
         if(isAutoconnectBroken) {
-            logger.error('Server autoconnect disabled on Forge 1.15.2 for builds earlier than 31.2.15 due to OpenGL Stack Overflow issue.')
-            logger.error('Please upgrade your Forge version to at least 31.2.15!')
+            logger.error('Connexion automatique au serveur désactivée sur Forge 1.15.2 pour les versions antérieures à 31.2.15 ')
+            logger.error('Veuillez mettre à niveau votre version de Forge vers au moins 31.2.15!')
         } else {
             this._processAutoConnectArg(args)
         }
@@ -745,7 +745,7 @@ class ProcessBuilder {
                         if(!shouldExclude){
                             fs.writeFile(path.join(tempNativePath, fileName), zipEntries[i].getData(), (err) => {
                                 if(err){
-                                    logger.error('Error while extracting native library:', err)
+                                    logger.error('Erreur lors de l"extraction de la bibliothèque native:', err)
                                 }
                             })
                         }
@@ -796,7 +796,7 @@ class ProcessBuilder {
                         if(!shouldExclude){
                             fs.writeFile(path.join(tempNativePath, extractName), zipEntries[i].getData(), (err) => {
                                 if(err){
-                                    logger.error('Error while extracting native library:', err)
+                                    logger.error('Erreur lors de l"extraction de la bibliothèque native :', err)
                                 }
                             })
                         }

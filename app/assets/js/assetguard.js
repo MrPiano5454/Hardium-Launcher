@@ -188,7 +188,7 @@ class Util {
             return false
 
         } catch(err) {
-            throw new Error('Forge version is complex (changed).. launcher requires a patch.')
+            throw new Error('La version de Forge est complexe (modifiée). Le lanceur nécessite un correctif.')
         }
     }
 
@@ -1200,7 +1200,7 @@ class AssetGuard extends EventEmitter {
                     }
                 }
                 //We didn't find forge's version.json.
-                reject('Unable to finalize Forge processing, version.json not found! Has forge changed their format?')
+                reject('Impossible de finaliser le traitement Forge, version.json introuvable ! Forge a-t-il changé son format ?')
             })
         })
     }
@@ -1227,10 +1227,10 @@ class AssetGuard extends EventEmitter {
             if(!fs.existsSync(versionFile) || force){
                 const url = await self._getVersionDataUrl(version)
                 //This download will never be tracked as it's essential and trivial.
-                AssetGuard.logger.info('Preparing download of ' + version + ' assets.')
+                AssetGuard.logger.info('Préparation du téléchargement de ' + version + ' assets.')
                 fs.ensureDirSync(versionPath)
                 const stream = request(url).pipe(fs.createWriteStream(versionFile))
-                stream.on('finish', () => {
+                stream.on('finir', () => {
                     resolve(JSON.parse(fs.readFileSync(versionFile)))
                 })
             } else {
@@ -1309,10 +1309,10 @@ class AssetGuard extends EventEmitter {
 
             let data = null
             if(!fs.existsSync(assetIndexLoc) || force){
-                AssetGuard.logger.info('Downloading ' + versionData.id + ' asset index.')
+                AssetGuard.logger.info('Telechargement ' + versionData.id + ' asset index.')
                 fs.ensureDirSync(indexPath)
                 const stream = request(assetIndex.url).pipe(fs.createWriteStream(assetIndexLoc))
-                stream.on('finish', () => {
+                stream.on('Finir', () => {
                     data = JSON.parse(fs.readFileSync(assetIndexLoc, 'utf-8'))
                     self._assetChainValidateAssets(versionData, data).then(() => {
                         resolve()
@@ -1645,11 +1645,11 @@ class AssetGuard extends EventEmitter {
             const entries = await zip.entries()
             pos = path.join(runtimeDir, Object.keys(entries)[0])
 
-            AssetGuard.logger.info('Extracting jdk..')
+            AssetGuard.logger.info('Extraction du jdk..')
             await zip.extract(null, runtimeDir)
-            AssetGuard.logger.info('Cleaning up..')
+            AssetGuard.logger.info('Nettoyer..')
             await fs.remove(zipPath)
-            AssetGuard.logger.info('Jdk extraction complete.')
+            AssetGuard.logger.info('Extraction JDK terminée.')
 
         } catch(err) {
             AssetGuard.logger.error(err)
@@ -1735,7 +1735,7 @@ class AssetGuard extends EventEmitter {
                         const contentLength = parseInt(resp.headers['content-length'])
 
                         if(contentLength !== asset.size){
-                            AssetGuard.logger.warn(`WARN: Got ${contentLength} bytes for ${asset.id}: Expected ${asset.size}`)
+                            AssetGuard.logger.warn(`AVERTISSEMENT : obtenu ${contentLength} octets pour ${asset.id}: Attendue ${asset.size}`)
                             doHashCheck = true
 
                             // Adjust download
@@ -1752,9 +1752,9 @@ class AssetGuard extends EventEmitter {
                             if(doHashCheck){
                                 const v = AssetGuard._validateLocal(asset.to, asset.type != null ? 'md5' : 'sha1', asset.hash)
                                 if(v){
-                                    AssetGuard.logger.warn(`Hashes match for ${asset.id}, byte mismatch is an issue in the distro index.`)
+                                    AssetGuard.logger.warn(`Les hachages correspondent à ${asset.id}, la non-concordance des octets est un problème dans l'index de distribution.`)
                                 } else {
-                                    AssetGuard.logger.error(`Hashes do not match, ${asset.id} may be corrupted.`)
+                                    AssetGuard.logger.error(`Les hachages ne correspondent pas, ${asset.id} peut être corrompu.`)
                                 }
                             }
 
@@ -1766,7 +1766,7 @@ class AssetGuard extends EventEmitter {
                     } else {
 
                         req.abort()
-                        AssetGuard.logger.error(`Failed to download ${asset.id}(${typeof asset.from === 'object' ? asset.from.url : asset.from}). Response code ${resp.statusCode}`)
+                        AssetGuard.logger.error(`Échec du téléchargement ${asset.id}(${typeof asset.from === 'object' ? asset.from.url : asset.from}). Code de réponse ${resp.statusCode}`)
                         self.progress += asset.size*1
                         self.emit('progress', 'download', self.progress, self.totaldlsize)
                         cb()
@@ -1787,9 +1787,9 @@ class AssetGuard extends EventEmitter {
             }, (err) => {
 
                 if(err){
-                    AssetGuard.logger.warn('An item in ' + identifier + ' failed to process')
+                    AssetGuard.logger.warn('Un élément dans ' + identifier + ' n"a pas réussi à traiter')
                 } else {
-                    AssetGuard.logger.info('All ' + identifier + ' have been processed successfully')
+                    AssetGuard.logger.info('All ' + identifier + ' ont été traités avec succès')
                 }
 
                 //self.totaldlsize -= dlTracker.dlsize

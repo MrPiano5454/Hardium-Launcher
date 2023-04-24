@@ -2468,7 +2468,6 @@ input:checked + .toggleSwitchSlider:before {
     justify-content: flex-end;
 }
 #landingContainer > #upper > #content {
-    display: inline-flex;
     width: 70%;
     height: 100%;
 }
@@ -2634,15 +2633,10 @@ input:checked + .toggleSwitchSlider:before {
 
 /* Date styles. */
 #newsArticleDate {
-    background: white;
-    color: black;
+    color: white;
     margin-top: 5px;
 }
 
-/* Author styles. */
-#newsArticleAuthor {
-    background: #a02d2a;
-}
 
 /* News article comments styles. */
 #newsArticleComments {
@@ -3964,4 +3958,23 @@ input:checked + .toggleSwitchSlider:before {
 /* Class which is applied when the spinner image is spinning. */
 .rotating {
     animation: rotating 10s linear infinite;
+}
+
+#content h2{
+    position: relative;
+    top: 150px;
+    height: auto;
+}
+#content h3{
+    position: relative;
+    height: auto;
+    top: 150px;
+    font-size: 80%;
+}
+#version h4{
+    position: relative;
+    top: 250px;
+    left: 460px;
+    font-size: 80%;
+    color:#848484;
 }
