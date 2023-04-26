@@ -246,7 +246,7 @@ function createWindow() {
 
     win.removeMenu()
 
-    win.resizable = true
+    win.resizable = false
 
     win.on('closed', () => {
         win = null
@@ -274,37 +274,6 @@ function createMenu() {
             }]
         }
 
-        // New edit menu adds support for text-editing keyboard shortcuts
-        let editSubMenu = {
-            label: 'Edit',
-            submenu: [{
-                label: 'Undo',
-                accelerator: 'CmdOrCtrl+Z',
-                selector: 'undo:'
-            }, {
-                label: 'Redo',
-                accelerator: 'Shift+CmdOrCtrl+Z',
-                selector: 'redo:'
-            }, {
-                type: 'separator'
-            }, {
-                label: 'Cut',
-                accelerator: 'CmdOrCtrl+X',
-                selector: 'cut:'
-            }, {
-                label: 'Copy',
-                accelerator: 'CmdOrCtrl+C',
-                selector: 'copy:'
-            }, {
-                label: 'Paste',
-                accelerator: 'CmdOrCtrl+V',
-                selector: 'paste:'
-            }, {
-                label: 'Select All',
-                accelerator: 'CmdOrCtrl+A',
-                selector: 'selectAll:'
-            }]
-        }
 
         // Bundle submenus into a single template and build a menu object with it
         let menuTemplate = [applicationSubMenu, editSubMenu]

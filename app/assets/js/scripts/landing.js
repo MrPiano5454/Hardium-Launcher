@@ -115,6 +115,7 @@ document.getElementById('settingsMediaButton').onclick = (e) => {
     prepareSettings()
     switchView(getCurrentView(), VIEWS.settings)
 }
+  
 
 // Bind avatar overlay button.
 document.getElementById('avatarOverlay').onclick = (e) => {
