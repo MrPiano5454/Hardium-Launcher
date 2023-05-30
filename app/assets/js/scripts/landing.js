@@ -2,6 +2,7 @@
  * Script for landing.ejs
  */
 // Requirements
+// eslint-disable-next-line linebreak-style
 const cp                      = require('child_process')
 const crypto                  = require('crypto')
 const { URL }                 = require('url')
@@ -115,7 +116,11 @@ document.getElementById('settingsMediaButton').onclick = (e) => {
     prepareSettings()
     switchView(getCurrentView(), VIEWS.settings)
 }
-  
+
+document.getElementById('etatMediaButton').onclick = (e) => {
+    prepareetat()
+    switchView(getCurrentView(), VIEWS.etat)
+}
 
 // Bind avatar overlay button.
 document.getElementById('avatarOverlay').onclick = (e) => {
@@ -154,11 +159,7 @@ function updateSelectedServer(serv){
     setLaunchEnabled(serv != null)
 }
 // Real text is set in uibinder.js on distributionIndexDone.
-server_selection_button.innerHTML = '\u2022 Loading..'
-server_selection_button.onclick = (e) => {
-    e.target.blur()
-    toggleServerSelection(true)
-}
+
 
 // Update Mojang Status Color
 const refreshMojangStatuses = async function(){
@@ -997,6 +998,7 @@ function initNews(){
                         }
 
                     } else {
+                        // eslint-disable-next-line linebreak-style
                         isNew = true
                         showNewsAlert()
                     }
